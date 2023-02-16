@@ -1,4 +1,4 @@
-function [reConstructed] = reconstructFromNameArray(nameArray)
+function [reConstructed] = reconstructFromNameArray(nameArray,scale)
 %For this to work the NameArray needs to contain the exact path of where to
 %find the image
 
@@ -16,7 +16,7 @@ for i=1:row
         current = im2double(current); %make double
         
         %One might want to edit the resizing! 
-        current = imresize(current,0.25,"bicubic"); %resize according to first step
+        current = imresize(current,scale,"bicubic"); %resize according to first step
         Repoduced((i-1)*length(current)+1:i*length(current), (j-1)*length(current)+1:j*length(current), :) = current; %replace "namepixel" with image
         
     end
