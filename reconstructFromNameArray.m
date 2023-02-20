@@ -16,7 +16,8 @@ for i=1:row
         current = im2double(current); %make double
         
         %One might want to edit the resizing! 
-        current = imresize(current,scale,"bicubic"); %resize according to first step
+        %Ändrade lite här resize gör rutor som är 25x25 istället för att minska dom med skala, detta för att hantera rektangulära bilder
+        current = imresize(current,[25 25],"bicubic"); %resize according to first step
         Repoduced((i-1)*length(current)+1:i*length(current), (j-1)*length(current)+1:j*length(current), :) = current; %replace "namepixel" with image
         
     end
