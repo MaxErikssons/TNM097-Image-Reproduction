@@ -1,6 +1,6 @@
 % This function takes an image and reproduce it using images stored in the database. 
 % Some optimization is done reducing the number of images in the database. 
-function [renderedImage] = reproduceImage(image, name)
+function [renderedImage] = reproduceImage(image, name, numberOfColors, imagesPerColor)
 tic
 %% Show image and calculate its color palette
 I = im2double(image);
@@ -8,7 +8,7 @@ figure;
 imshow(I);
 title('Image to reproduce');
 
-numberOfColors = 10;
+
 palette = calculateColorPalette(I, numberOfColors);
 
 %% Plot the color palette
@@ -20,7 +20,7 @@ palette = calculateColorPalette(I, numberOfColors);
 % axis off
 
 %% Reduce the database to only include images with colors in the palette for the image to reproduce.
-reducedDatabase = reduceDatabase(palette, numberOfColors);
+reducedDatabase = reduceDatabase(palette, numberOfColors, imagesPerColor);
 
 %% Divide the image into equaly sized tiles
 numberOfRows = 120; %% Number of tiles in each direction.

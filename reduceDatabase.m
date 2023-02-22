@@ -1,29 +1,29 @@
-% This function loads the precalculated color palettes for all images. 
-% It then compare these palettes with the colors in "palette" and
-% picks the one with the least distance and saves this image in a reduced database.  
+% This function loads the precalculated LAB-values for all images.
+% It then compare these values with the colors in "palette" (converted to LAB) and
+% picks the one with the least distance and saves this image in a reduced database.
 
-%%THIS FUNCTION SHOULD BE CHANGED IN THE FUTURE. WE DO NOT USE THE ENTIRE
-%%COLOR PALETTE FOR ALL IMAGES, JUST THE MOST OCCURING COLOR!
+function [reducedDatabase] = reduceDatabase(palette, numberOfColors, imagesPerColor)
 
-function [reducedDatabase] = reduceDatabase(palette, numberOfColors)
+%% Load LAB-values for all images.
+load('labValuesFlowers.mat');
+reducedDatabase = cell(numberOfColors*imagesPerColor, 1);
 
-%% Load color palettes for all images.
-load('ImagePalettes.mat')
-
-folder = "Images/flower"; % locate folder
-imageFiles = dir(fullfile(folder,'*.jpg'));
-nfiles = length(imageFiles);
-
-reducedDatabase = cell(numberOfColors, 1);
-
-%% For each color of the palette, compare the color with the palettes for all images.
+%% For each color of the palette, compare the LAB-value with the LAB-values store for all images.
+%% And save the one with least distance.
 for i = 1:numberOfColors
     targetColor = palette(i,:);
-    targetColor = repmat(targetColor, [nfiles, 1]);
-    distances = sqrt((image_palettes(:,1,1) - targetColor(:,1)).^2 + (image_palettes(:,1,2) - targetColor(:,2)).^2 + (image_palettes(:,1,3) - targetColor(:,3)).^2);
-    minVal = min(distances);
-    index = distances == minVal;
-    filename=fullfile(folder,imageFiles(index).name); % get filename of current image.
-    reducedDatabase{i} = filename; % store the result for this iteration in the cell array
+    targetColor = rgb2lab(targetColor);
+    [L_ref, a_ref, b_ref] = deal(targetColor(1), targetColor(2), targetColor(3));
+    distances = zeros(length(stored_Lab_values));
+    for j = 1:length(stored_Lab_values)
+        [L, a, b] = deal(stored_Lab_values{j}{2},stored_Lab_values{j}{3},stored_Lab_values{j}{4});
+        distances(j) = colorDifference(L,a,b, L_ref, a_ref, b_ref);
+    end
+    [~, indices] = sort(distances);
+    for k = 1:imagesPerColor
+        filename = stored_Lab_values{indices(k)}{1};
+        reducedDatabase{(i-1) * imagesPerColor + k} = filename; % store the result for this iteration in the cell array
+    end
 end
+
 end
