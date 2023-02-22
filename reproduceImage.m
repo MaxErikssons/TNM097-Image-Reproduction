@@ -13,7 +13,7 @@ palette = calculateColorPalette(I, numberOfColors);
 
 %% Plot the color palette
 % figure
-% for k = 1:clusters
+% for k = 1:numberOfColors
 %     rectangle('Position', [k-1, 0, 1, 1], 'FaceColor', palette(k,:))
 % end
 % title('Color palette over the most occuring colors in the image');
