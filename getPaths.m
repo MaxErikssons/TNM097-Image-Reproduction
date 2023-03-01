@@ -3,7 +3,7 @@
 % this image. This is done for each tile before reshaping the paths into
 % 2D-array instead of 1D-vector. 
 
-function [paths] = getPaths(reducedDatabase, tiles, numberOfRows)
+function [paths] = getPaths(reducedDatabase, tiles, numberOfColumns, numberOfRows)
 
 %% Load LAB-values for all images.
 load('labValuesFlowers.mat');
@@ -38,5 +38,5 @@ for j = 1:length(tiles)
 end
 
 %% Reshape paths into numberOfRows x numberOfRows cell.
-paths = reshape(paths, numberOfRows, numberOfRows);
+paths = reshape(paths, numberOfRows, numberOfColumns);
 end
