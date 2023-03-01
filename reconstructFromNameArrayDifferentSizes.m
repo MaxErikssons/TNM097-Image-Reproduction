@@ -6,7 +6,7 @@ function [reproducedImage] = reconstructFromNameArrayDifferentSizes(namearray)
 %min första tanke är gå så långt åt ett håll som möjligt sen gör det åt
 %andra hållet och loopa... lite bökigt när jag skriver det såhär men det
 %kanske blir tydligt när jag löst det
-Repoduced = zeros(row*25,col*25,3);
+Repoduced = zeros(row*42,col*42,3);
 
 
 
@@ -49,7 +49,7 @@ for i = 1:row
         
         iterator= iterator+1;
         
-        baseSize = 25;
+        baseSize = 42;
                     
         current = imread(namearray(i,j)); %Read img
         current = im2double(current); %make double

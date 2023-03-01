@@ -2,6 +2,7 @@ function [outputArg1] = reconstructWithSsim(FilePath,imageDataBase,subImageScale
 %Start för 1.5: return of the ssim, the tale of defeat
 
 % read an image
+nrOftiles = 80;
  if ~exist('subImageScale','var')
      % third parameter does not exist, so default it to something
       subImageScale = 1;
@@ -13,11 +14,28 @@ kmeanedArray = imageDataBase;%%byt när vi gör detta till en funktion
 
 %tileing 
 [OGrow,OGcol,whatever] = size(inpict);
-[tilesrow,tilescol,whatever] = size(imread(string(kmeanedArray{1}(1))));
-tilescol= tilescol*subImageScale%%scaling factor on the images used to reproduce
-tilesrow= tilesrow*subImageScale;
-x = floor(OGrow/tilesrow);
-y = floor(OGcol/tilescol);
+%[tilesrow,tilescol,whatever] = size(imread(string(kmeanedArray{1}(1))));
+% how large is each tile
+
+if OGcol > OGrow
+    
+    tilesrow= nrOftiles;
+    tilescol= nrOftiles/(min(OGrow,OGcol)/(max(OGrow,OGcol)));
+else
+    
+    
+    
+    tilesrow= nrOftiles/(min(OGrow,OGcol)/(max(OGrow,OGcol)));
+    tilescol= nrOftiles;
+end
+tileSize= 5;
+
+
+tilesrow = OGrow/tileSize;
+tilescol = OGcol/tileSize;
+
+x = floor(tilesrow);
+y = floor(tilescol);
 
 Nr_row = x; %% HÄR BESTÄMMER NI HUR MÅNGA TILES DET SKA VARA Testa gärna med lite färre om ni ska köra 2500 tiles tar fan tid... 
 
