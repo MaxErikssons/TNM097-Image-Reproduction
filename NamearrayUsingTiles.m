@@ -1,9 +1,9 @@
-function [outputArg1,outputArg2] = NamearrayUsingTiles(FilePath,imageDataBase)
+function [outputArg1,outputArg2] = NamearrayUsingTiles(FilePath,imageDataBase,TileSize)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 
 nrOftiles = 42;
-[inpict,colmap] = imread(FilePath) % 384x512x3
+inpict =FilePath% 384x512x3
 kmeanedArray = imageDataBase;%%byt när vi gör detta till en funktion
 
 [OGrow,OGcol,whatever] = size(inpict);
@@ -19,12 +19,12 @@ else
     tilesrow= nrOftiles/(min(OGrow,OGcol)/(max(OGrow,OGcol)));
     tilescol= nrOftiles;
 end
-tileSize= 5;
+tileSize= TileSize;
 testx =OGrow/tilesrow;
 testy =OGcol/tilescol;
 
-tilesrow = OGrow/testx;
-tilescol = OGcol/testy;
+tilesrow = OGrow/tileSize;
+tilescol = OGcol/tileSize;
 
 x = floor(tilesrow);
 y = floor(tilescol);
@@ -72,6 +72,8 @@ for i = 1:x*y
         
     
     end
+    
+    bestLabMatch =100;
     row = mod(i-1,y)+1;
     col = ceil(i/(y));
     

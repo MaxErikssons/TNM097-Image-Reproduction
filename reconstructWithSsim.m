@@ -1,4 +1,4 @@
-function [outputArg1] = reconstructWithSsim(FilePath,imageDataBase,subImageScale)
+function [outputArg1] = reconstructWithSsim(FilePath,imageDataBase,tileSize)
 %Start för 1.5: return of the ssim, the tale of defeat
 
 % read an image
@@ -7,7 +7,7 @@ nrOftiles = 80;
      % third parameter does not exist, so default it to something
       subImageScale = 1;
  end
-[inpict,colmap] = imread(FilePath) % 384x512x3
+inpict= FilePath % 384x512x3
 
 kmeanedArray = imageDataBase;%%byt när vi gör detta till en funktion
 
@@ -28,7 +28,7 @@ else
     tilesrow= nrOftiles/(min(OGrow,OGcol)/(max(OGrow,OGcol)));
     tilescol= nrOftiles;
 end
-tileSize= 5;
+tileSize=tileSize;
 
 
 tilesrow = OGrow/tileSize;
@@ -99,7 +99,7 @@ for i = 1:x*y
         
         %%läste att 2.3 i deltaE är just noticable differense så vi kör det
         %%som default
-        if deltaE < 2.3 %% this value needs to be configured
+        if deltaE < 4.6 %% this value needs to be configured
             if topMatches(1) == ""
                 
                     topMatches(1) =kmeanedArray{q}(1);
