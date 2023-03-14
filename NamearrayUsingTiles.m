@@ -3,7 +3,7 @@ function [outputArg1,outputArg2] = NamearrayUsingTiles(FilePath,imageDataBase,Ti
 %   Detailed explanation goes here
 
 nrOftiles = 42;
-inpict =FilePath% 384x512x3
+inpict =FilePath;% 384x512x3
 kmeanedArray = imageDataBase;%%byt när vi gör detta till en funktion
 
 [OGrow,OGcol,whatever] = size(inpict);
@@ -32,7 +32,7 @@ y = floor(tilescol);
 tiling = [x y]; % [y x]
 subimages = imdetile(inpict,tiling,'direction','row'); % 77x85x3x30
 %split into tiles
-montage(subimages,'size',tiling,'bordersize',[1 1],'backgroundcolor','w')
+montage(subimages,'size',tiling,'bordersize',[1 1],'backgroundcolor','w');
 
 
 valueBestMatch = 0;

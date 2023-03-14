@@ -2,7 +2,7 @@ function [reConstructed] = reconstructFromNameArray(nameArray,scale)
 %For this to work the NameArray needs to contain the exact path of where to
 %find the image
 
-Repoduced = []
+Repoduced = [];
 nameArrayToReprocude = nameArray; %Default
 
 
