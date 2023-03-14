@@ -88,11 +88,7 @@ end
 
 
 
-%imshow(reconstructFromNameArray(namearray,1));
 
-%%sista du måste göra är att maska värderna så att det svarta blir
-%%originalet och restan blir som det ska vara, alternativt att du löser
-%%1orna men helt originalet
 
 
 

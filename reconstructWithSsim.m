@@ -7,7 +7,7 @@ nrOftiles = 80;
      % third parameter does not exist, so default it to something
       subImageScale = 1;
  end
-inpict= FilePath % 384x512x3
+inpict= FilePath; % 384x512x3
 
 kmeanedArray = imageDataBase;%%byt när vi gör detta till en funktion
 
@@ -138,13 +138,13 @@ for i = 1:x*y
     col = ceil(i/(y));
     sep ="";
     if stringWithBestSsim == ""
-        vafan = 0 
-        topMatches
+        
+        topMatches;
     end
     ssimNameArray(col,row) = stringWithBestSsim;
     valueBestMatch=0;
 end
 
-outputArg1 = ssimNameArray
+outputArg1 = ssimNameArray;
 end
 
