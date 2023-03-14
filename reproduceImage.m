@@ -27,6 +27,9 @@ minRowsCols = 70;
 maxRowsCols = 140;
 found = false;
 
+tempHeight = height;
+tempWidth = width;
+
 % Find a value that is divisble with the height. 
 while ~found
     for numberOfColoumns = maxRowsCols:-1:minRowsCols
@@ -54,6 +57,8 @@ while ~found
     end
 end
 
+if tempWidth ~= width || tempHeight ~= height
+     disp('Image aspects was not divisible with tiling rows and/or columns, scaling performed.')
 I = imresize(I, [height, width], 'bicubic');
 ratio = height/width;
 
